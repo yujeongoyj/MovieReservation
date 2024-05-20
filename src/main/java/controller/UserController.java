@@ -13,6 +13,13 @@ public class UserController {
     public UserController() {
         list = new ArrayList<>();
         nextId = 1;
+        //  관리자 계정 추가
+        UserDTO admin = new UserDTO();
+        admin.setUsername("admin");
+        admin.setPassword("1234");
+        admin.setNickname("Administrator");
+        admin.setAdmin(true);
+        list.add(admin);
     }
 
     public void insert(UserDTO userDTO) {
@@ -68,4 +75,6 @@ public class UserController {
 
         return list.get(list.indexOf(userDTO)).getNickname();
     }
+
+
 }

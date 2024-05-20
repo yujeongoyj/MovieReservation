@@ -21,20 +21,29 @@ public class BoardViewer {
     @Setter
     private UserDTO logIn;
 
-    public void showMenu() {
-        String message = "1. 글 작성하기 2. 글 목록 보기 3. 뒤로 가기";
+
+
+
+    public void showAdminMenu() { // 관리자로 로그인 했을 때
+        System.out.println("--------관리자화면-----------");
+        String message = "1. 영화 등록하기 2. 영화 정보 수정하기 3. 기존 영화 삭제하기";
         while (true) {
-            int userChoice = ScannerUtil.nextInt(scanner, message);
-            if (userChoice == 1) {
+            int choice = ScannerUtil.nextInt(scanner, message);
+            if (choice == 1) {
                 insert();
-            } else if (userChoice == 2) {
-                printList();
-            } else if (userChoice == 3) {
-                System.out.println("메인 화면으로 돌아갑니다.");
-                break;
+            } else if (choice == 2) {
+
+            } else if (choice == 3) {
+
             }
         }
+
     }
+
+    public void showCriticMenu() {
+        System.out.println("-------평론가 화면-----------");
+    }
+
 
     private void insert() {
         BoardDTO boardDTO = new BoardDTO();
