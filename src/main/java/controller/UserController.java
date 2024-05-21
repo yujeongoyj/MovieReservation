@@ -5,6 +5,8 @@ import model.UserDTO;
 import java.util.ArrayList;
 
 public class UserController {
+
+
     // 유사 DB 역할을 할 ArrayList 필드
     private ArrayList<UserDTO> list;
     // 다음 입력될 회원의 번호를 저장할 int 필드
@@ -21,6 +23,19 @@ public class UserController {
         admin.setAdmin(true);
         list.add(admin);
     }
+
+//    public UserDTO adminAccount(String username, String password) {
+//        UserDTO admin = new UserDTO();
+//        admin.setUsername("admin");
+//        admin.setPassword("1234");
+//        admin.setNickname("Administrator");
+//        admin.setLevel(3);
+//        admin.setId(-1); // 임의의 ID
+//        return admin;
+//    }
+
+
+
 
     public void insert(UserDTO userDTO) {
         userDTO.setId(nextId++);

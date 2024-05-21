@@ -1,5 +1,6 @@
 package viewer;
 
+import controller.MovieController;
 import controller.UserController;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,8 @@ public class UserViewer {
     private UserDTO logIn;
     @Setter
     private BoardViewer boardViewer;
+    @Setter
+    private MovieController movieController;
 
     public void showIndex() {
         String message = "1. 로그인 2. 회원가입 3. 프로그램 종료";
@@ -26,11 +29,11 @@ public class UserViewer {
                 auth();
                 if (logIn != null) {
                     if (logIn.isAdmin()) {
-                        boardViewer.showAdminMenu();
+                       showAdminMenu();
                     } else if (logIn.getLevel() == 2) {
                         boardViewer.showCriticMenu();
                     } else if (logIn.getLevel() == 3) {
-                        boardViewer.showAdminMenu();
+                        showAdminMenu();
                     } else {
                         boardViewer.setLogIn(logIn);
                         showMenu();
@@ -44,6 +47,24 @@ public class UserViewer {
                 break;
             }
         }
+    }
+
+    public void showAdminMenu() { // 관리자로 로그인 했을 때
+        System.out.println("--------관리자화면-----------");
+        String message = "1. 영화 등록하기 2. 영화 정보 수정하기 3. 기존 영화 삭제하기 4. 뒤로가기";
+        while (true) {
+            int choice = ScannerUtil.nextInt(scanner, message);
+            if (choice == 1) {
+                boardViewer.insert();
+            } else if (choice == 2) {
+
+            } else if (choice == 3) {
+
+            } else if (choice == 4) {
+                showIndex();
+            }
+        }
+
     }
 
     private void auth() {
@@ -95,7 +116,7 @@ public class UserViewer {
         while (logIn != null) {
             int userChoice = ScannerUtil.nextInt(scanner, message);
             if (userChoice == 1) {
-       //         boardViewer.showMenu();
+                //         boardViewer.showMenu();
             } else if (userChoice == 2) {
                 printInfo();
             } else if (userChoice == 3) {
@@ -156,7 +177,6 @@ public class UserViewer {
             System.out.println("기존 비밀번호와 틀려서 회원 정보 수정을 할 수 없습니다.");
         }
     }
-
 
 
 

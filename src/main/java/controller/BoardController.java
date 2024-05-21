@@ -1,6 +1,7 @@
 package controller;
 
 import model.BoardDTO;
+import model.MovieDTO;
 
 import java.util.ArrayList;
 
