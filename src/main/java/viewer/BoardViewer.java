@@ -22,7 +22,7 @@ public class BoardViewer {
     @Setter
     private MovieViewer movieViewer;
     @Setter
-    private UserViewer userViewer;
+    public UserViewer userViewer;
 
 
     public void adminMenu1() {
@@ -32,8 +32,6 @@ public class BoardViewer {
             movieViewer.addMovie();
         } else if (menuChoice == 2) {
             movieViewer.modifyMovie();
-        } else if (menuChoice == 3) {
-            userViewer.showAdminMenu();
         }
     }
 
@@ -44,8 +42,6 @@ public class BoardViewer {
 
         } else if (menuChoice == 2) {
 
-        } else if (menuChoice == 3) {
-            userViewer.showAdminMenu();
         }
 
     }
