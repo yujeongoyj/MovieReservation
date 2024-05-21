@@ -4,6 +4,7 @@ package controller;
 
 
 import model.MovieDTO;
+import model.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,31 @@ public class MovieController {
         list.add(movieDTO);
     }
 
-//    public List<MovieDTO> selectAll() {
-//        return new ArrayList<>(list);
-//    }
+    public List<MovieDTO> selectAll() {
+        return list;
+    }
+
+    public MovieDTO selectOne(int id) {
+        for (MovieDTO movie : list) {
+            if (movie.getId() == id) {
+                return movie;
+            }
+        }
+        return null;
+    }
+
+
+//    public MovieDTO selectOne(int id) {
+//        MovieDTO temp = new MovieDTO();
+//        temp.setId(id);
+//        if (list.contains(temp)) {
+//            return list.get(list.indexOf(temp));
+//        }
 //
+//        return null;
+//    }
+
+
 //    // ID로 영화 검색
 //    public MovieDTO selectOne(int id) {
 //        for (MovieDTO movie : list) {
@@ -51,5 +73,15 @@ public class MovieController {
 //    public void delete(int id) {
 //        list.removeIf(movie -> movie.getId() == id);
 //    }
+
+
+    public boolean validateInput(int input) {
+        if (input == 0) {
+            return true;
+        }
+        MovieDTO movieDTO = new MovieDTO();
+        movieDTO.setId(input);
+        return list.contains(movieDTO);
+    }
 
 }

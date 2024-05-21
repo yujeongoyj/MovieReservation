@@ -1,5 +1,6 @@
 package controller;
 
+import model.MovieDTO;
 import model.UserDTO;
 
 import java.util.ArrayList;
@@ -24,17 +25,6 @@ public class UserController {
         list.add(admin);
     }
 
-//    public UserDTO adminAccount(String username, String password) {
-//        UserDTO admin = new UserDTO();
-//        admin.setUsername("admin");
-//        admin.setPassword("1234");
-//        admin.setNickname("Administrator");
-//        admin.setLevel(3);
-//        admin.setId(-1); // 임의의 ID
-//        return admin;
-//    }
-
-
 
 
     public void insert(UserDTO userDTO) {
@@ -51,16 +41,16 @@ public class UserController {
 
         return true;
     }
-
-    public UserDTO selectOne(int id) {
-        UserDTO temp = new UserDTO();
-        temp.setId(id);
-        if (list.contains(temp)) {
-            return list.get(list.indexOf(temp));
-        }
-
-        return null;
-    }
+//
+//    public UserDTO selectOne(int id) {
+//        UserDTO temp = new UserDTO();
+//        temp.setId(id);
+//        if (list.contains(temp)) {
+//            return list.get(list.indexOf(temp));
+//        }
+//
+//        return null;
+//    }
 
     public void update(UserDTO userDTO) {
         list.set(list.indexOf(userDTO), userDTO);
@@ -90,6 +80,7 @@ public class UserController {
 
         return list.get(list.indexOf(userDTO)).getNickname();
     }
+
 
 
 }
