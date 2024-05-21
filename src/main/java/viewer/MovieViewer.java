@@ -50,17 +50,18 @@ public class MovieViewer {
 
         String message = "상세보기할 영화 번호를 선택하세요";
         int choice = ScannerUtil.nextInt(scanner, message);
-        while(!movieController.validateInput(choice)){
-            System.out.println("잘못 입력하셨습니다");
-            choice = ScannerUtil.nextInt(scanner, message);
-        }
-        if(choice != 0){
-            printOne(choice);
-        }
+        printOne(choice);
     }
+
 
     private void printOne(int id){
         MovieDTO movieDTO = movieController.selectOne(id);
+        System.out.println("찾은 영화: " + movieDTO); // 로그 추가
+        if (movieDTO == null) {
+            System.out.println("해당 ID의 영화를 찾을 수 없습니다.");
+            return;
+        }
+
         System.out.println("==============================");
         System.out.println(movieDTO.getId()+"번");
         System.out.println("제목 : "+movieDTO.getTitle());
