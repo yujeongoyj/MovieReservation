@@ -1,6 +1,6 @@
 package main;
 
-import controller.BoardController;
+
 import controller.UserController;
 import controller.MovieController;
 import viewer.BoardViewer;
@@ -17,7 +17,6 @@ public class BoardMain {
 
         // 각종 컨트롤러 클래스 객체
         UserController userController = new UserController();
-        BoardController boardController = new BoardController();
         MovieController movieController = new MovieController();
 
         // 각종 뷰어 클래스 객체
@@ -34,8 +33,7 @@ public class BoardMain {
 
         boardViewer.setScanner(scanner);
         boardViewer.setUserController(userController);
-        boardViewer.setBoardController(boardController);
-       // boardViewer.setMovieController(movieController); // MovieController 설정
+       boardViewer.setMovieController(movieController); // MovieController 설정
 
 
         userViewer.showIndex();

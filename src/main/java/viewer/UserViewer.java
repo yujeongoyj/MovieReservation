@@ -29,9 +29,9 @@ public class UserViewer {
                 auth();
                 if (logIn != null) {
                     if (logIn.isAdmin()) {
-                       showAdminMenu();
+                        showAdminMenu();
                     } else if (logIn.getLevel() == 2) {
-                        boardViewer.showCriticMenu();
+                        showCriticMenu();
                     } else if (logIn.getLevel() == 3) {
                         showAdminMenu();
                     } else {
@@ -51,20 +51,22 @@ public class UserViewer {
 
     public void showAdminMenu() { // 관리자로 로그인 했을 때
         System.out.println("--------관리자화면-----------");
-        String message = "1. 영화 등록하기 2. 영화 정보 수정하기 3. 기존 영화 삭제하기 4. 뒤로가기";
+        String message = "1. 영화 메뉴 2. 극장 메뉴 3. 뒤로가기";
         while (true) {
             int choice = ScannerUtil.nextInt(scanner, message);
             if (choice == 1) {
-                boardViewer.insert();
+                boardViewer.adminMenu1();
             } else if (choice == 2) {
-
+                boardViewer.adminMenu2();
             } else if (choice == 3) {
 
-            } else if (choice == 4) {
-                showIndex();
             }
         }
 
+    }
+
+    public void showCriticMenu() {
+        System.out.println("-------평론가 화면-----------");
     }
 
     private void auth() {
@@ -177,7 +179,6 @@ public class UserViewer {
             System.out.println("기존 비밀번호와 틀려서 회원 정보 수정을 할 수 없습니다.");
         }
     }
-
 
 
 }

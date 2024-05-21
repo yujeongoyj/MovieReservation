@@ -1,21 +1,17 @@
 package viewer;
 
-import controller.BoardController;
+
 import controller.MovieController;
 import controller.UserController;
-import lombok.Getter;
 import lombok.Setter;
-import model.BoardDTO;
 import model.MovieDTO;
 import model.UserDTO;
 import util.ScannerUtil;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardViewer {
-    @Setter
-    private BoardController boardController;
+
     @Setter
     private UserController userController;
     @Setter
@@ -30,14 +26,37 @@ public class BoardViewer {
     private MovieDTO movieDTO;
 
 
+    public void adminMenu1() {
+        String message = "1. 영화 등록 2. 영화 수정 3. 영화 삭제 4. 뒤로가기";
+        int menuChoice = ScannerUtil.nextInt(scanner, message);
+        if(menuChoice == 1){
+            addMovie();
+        }else if(menuChoice ==2){
 
+        }else if(menuChoice ==3){
 
-    public void showCriticMenu() {
-        System.out.println("-------평론가 화면-----------");
+        }else if(menuChoice ==4){
+
+        }
+    }
+
+    public void adminMenu2() {
+        String message = "1. 극장 등록 2. 극장 수정 3. 극장 삭제 4. 뒤로가기";
+        int menuChoice = ScannerUtil.nextInt(scanner, message);
+        if(menuChoice == 1){
+
+        }else if(menuChoice ==2){
+
+        }else if(menuChoice ==3){
+
+        }else if(menuChoice ==4){
+
+        }
+
     }
 
 
-    public void insert() { // 영화 등록하기
+    public void addMovie() {
         MovieDTO movieDTO = new MovieDTO();
 
 
@@ -50,7 +69,7 @@ public class BoardViewer {
         message = "영화 등급을 입력하세요:";
         movieDTO.setLevel(ScannerUtil.nextInt(scanner, message));
 
-        movieController.insert(movieDTO);
+        movieController.addMovie(movieDTO);
         System.out.println("영화가 성공적으로 등록되었습니다.");
     }
 
