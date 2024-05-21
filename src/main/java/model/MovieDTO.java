@@ -14,4 +14,18 @@ public class MovieDTO {
     public MovieDTO() {
 
     }
+// 리스트에서 객체를 제거하기 위해 필요
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o instanceof MovieDTO) {
+            MovieDTO m = (MovieDTO) o;
+            return id == m.id;
+        }
+
+        return false;
+    }
 }
