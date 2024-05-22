@@ -26,6 +26,8 @@ public class BoardViewer {
     public UserViewer userViewer;
     @Setter
     private TheaterViewer theaterViewer;
+    @Setter
+    private ScreenViewer screenViewer;
 
 
     public void adminMenu1() {
@@ -47,6 +49,17 @@ public class BoardViewer {
         } else if (menuChoice == 2) {
             theaterViewer.modifyTheater();
         }
+    }
+
+    public void adminMenu3() {
+        String message = "1. 상영정보 등록 2. 상영정보 수정 3. 뒤로가기";
+        int menuChoice = ScannerUtil.nextInt(scanner, message);
+        if(menuChoice == 1) {
+            screenViewer.addScreen();
+        } else if(menuChoice ==2 ){
+            screenViewer.modifyScreen();
+        }
+
     }
 
 

@@ -44,7 +44,7 @@ public class MovieViewer {
 
     }
 
-    private void movieList() {
+    public void movieList() {
         ArrayList<MovieDTO> list = (ArrayList<MovieDTO>) movieController.selectAll();
         for (MovieDTO m : list) {
             System.out.printf("%d. %s (%d세)\n", m.getId(), m.getTitle(), m.getLevel());

@@ -59,9 +59,8 @@ public class UserViewer {
             } else if (choice == 2) {
                 boardViewer.adminMenu2();
             } else if (choice == 3) {
-
-            }
-            else if (choice == 4) {
+                boardViewer.adminMenu3();
+            } else if (choice == 4) {
                 showIndex();
             }
         }

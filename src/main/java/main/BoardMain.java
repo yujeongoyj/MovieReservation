@@ -1,15 +1,14 @@
 package main;
 
 
+import controller.ScreenController;
 import controller.TheaterController;
 import controller.UserController;
 import controller.MovieController;
 import model.MovieDTO;
+import model.ScreenDTO;
 import model.TheaterDTO;
-import viewer.BoardViewer;
-import viewer.MovieViewer;
-import viewer.UserViewer;
-import viewer.TheaterViewer;
+import viewer.*;
 
 
 import java.util.Scanner;
@@ -23,20 +22,27 @@ public class BoardMain {
         UserController userController = new UserController();
         MovieController movieController = new MovieController();
         TheaterController theaterController = new TheaterController();
+        ScreenController screenController = new ScreenController();
 
         // 각종 뷰어 클래스 객체
         UserViewer userViewer = new UserViewer();
         BoardViewer boardViewer = new BoardViewer();
         MovieViewer movieViewer = new MovieViewer();
         TheaterViewer theaterViewer = new TheaterViewer();
+      ScreenViewer screenViewer = new ScreenViewer();
 
         MovieDTO movieDTO = new MovieDTO();
         TheaterDTO theaterDTO = new TheaterDTO();
+        ScreenDTO screenDTO = new ScreenDTO();
 
         // setter를 사용한 의존성 주입
         userViewer.setScanner(scanner);
         userViewer.setUserController(userController);
         userViewer.setBoardViewer(boardViewer);
+        screenViewer.setScreenController(screenController);
+        screenViewer.setMovieController(movieController);
+        screenViewer.setTheaterController(theaterController);
+
 
 
         boardViewer.setScanner(scanner);
@@ -44,12 +50,15 @@ public class BoardMain {
         boardViewer.setMovieController(movieController); // MovieController 설정
         boardViewer.setMovieViewer(movieViewer);
         boardViewer.setTheaterViewer(theaterViewer);
+        boardViewer.setScreenViewer(screenViewer);
 
         movieViewer.setScanner(scanner);
         movieViewer.setMovieController(movieController);
         userViewer.setMovieController(movieController); // UserViewer에 MovieController 설정
         movieDTO.setId(movieDTO.getId());
         theaterViewer.setTheaterController(theaterController);
+
+
 
         userViewer.showIndex();
     }
