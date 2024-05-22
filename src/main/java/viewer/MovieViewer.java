@@ -42,6 +42,10 @@ public class MovieViewer {
         System.out.println("영화 리스트----------------------");
         movieList();
 
+        String message = "상세보기할 영화 번호를 선택하세요 / 0으로 뒤로가기 ";
+        int choice = ScannerUtil.nextInt(scanner, message);
+        printOne(choice);
+
     }
 
     public void movieList() {
@@ -50,9 +54,7 @@ public class MovieViewer {
             System.out.printf("%d. %s (%d세)\n", m.getId(), m.getTitle(), m.getLevel());
         }
 
-        String message = "상세보기할 영화 번호를 선택하세요 / 0으로 뒤로가기 ";
-        int choice = ScannerUtil.nextInt(scanner, message);
-        printOne(choice);
+
     }
 
 

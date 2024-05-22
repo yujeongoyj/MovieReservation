@@ -23,6 +23,10 @@ public class ScreenViewer {
     private TheaterController theaterController;
     @Setter
     private Scanner scanner = new Scanner(System.in);
+    @Setter
+    private MovieViewer movieViewer;
+    @Setter
+    private TheaterViewer theaterViewer;
 
 
     public ScreenViewer() {
@@ -33,7 +37,9 @@ public class ScreenViewer {
     public void addScreen() {
         ScreenDTO screenDTO = new ScreenDTO();
 
-        String message = "영화 ID를 입력하세요:";
+        System.out.println("영화 목록---------------------------");
+        movieViewer.movieList();
+        String message = "등록할 영화 ID를 입력하세요:";
         int movieId = ScannerUtil.nextInt(scanner, message);
         MovieDTO movie = movieController.selectOne(movieId);
         if (movie == null) {
@@ -42,7 +48,9 @@ public class ScreenViewer {
         }
         screenDTO.setMovieId(movieId);
 
-        message = "극장 ID를 입력하세요:";
+        System.out.println("극장 목록------------------------------");
+        theaterViewer.theaterList();
+        message = "등록할 극장 ID를 입력하세요:";
         int theaterId = ScannerUtil.nextInt(scanner, message);
         TheaterDTO theater = theaterController.selectOne(theaterId);
         if (theater == null) {
@@ -51,7 +59,7 @@ public class ScreenViewer {
         }
         screenDTO.setTheaterId(theaterId);
 
-        message = "상영 시간을 입력하세요 (예: 2023-12-25 14:30):";
+        message = "상영 시간을 입력하세요 :";
         screenDTO.setScreenTime(ScannerUtil.nextLine(scanner, message));
 
         screenController.addScreen(screenDTO);
@@ -59,14 +67,18 @@ public class ScreenViewer {
     }
 
     public void modifyScreen() {
-        System.out.println("상영 정보 리스트");
+        System.out.println("상영 정보 리스트-----------------------");
         screenList();
     }
 
     private void screenList() {
         ArrayList<ScreenDTO> list = (ArrayList<ScreenDTO>) screenController.selectAll();
         for (ScreenDTO s : list) {
-            System.out.printf("%d. 영화 ID: %d, 극장 ID: %d, 상영 시간: %s\n", s.getId(), s.getMovieId(), s.getTheaterId(), s.getScreenTime());
+            MovieDTO movie = movieController.selectOne(s.getMovieId());
+            TheaterDTO theater = theaterController.selectOne(s.getTheaterId());
+
+            System.out.printf("ID: %d. 영화: %s, 극장: %s, 상영 시간: %s\n", s.getId(), movie.getTitle(), theater.getName(), s.getScreenTime());
+
         }
 
         String message = "상세보기할 상영 정보 번호를 선택하세요 / 0으로 뒤로가기 ";
@@ -105,7 +117,7 @@ public class ScreenViewer {
     }
 
     public void update(ScreenDTO screenDTO) {
-        String message = "수정된 상영 시간을 입력하세요 (예: 2023-12-25 14:30):";
+        String message = "수정된 상영 시간을 입력하세요 :";
         screenDTO.setScreenTime(ScannerUtil.nextLine(scanner, message));
 
         screenController.update(screenDTO);

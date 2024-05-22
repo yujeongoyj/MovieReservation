@@ -31,6 +31,7 @@ public class BoardMain {
         TheaterViewer theaterViewer = new TheaterViewer();
       ScreenViewer screenViewer = new ScreenViewer();
 
+
         MovieDTO movieDTO = new MovieDTO();
         TheaterDTO theaterDTO = new TheaterDTO();
         ScreenDTO screenDTO = new ScreenDTO();
@@ -59,6 +60,9 @@ public class BoardMain {
         theaterViewer.setTheaterController(theaterController);
 
 
+        screenViewer.setMovieViewer(movieViewer);
+        screenViewer.setScreenController(screenController);
+        screenViewer.setTheaterViewer(theaterViewer);
 
         userViewer.showIndex();
     }

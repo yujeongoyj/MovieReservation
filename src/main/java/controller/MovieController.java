@@ -1,8 +1,6 @@
 package controller;
 
 
-
-
 import model.MovieDTO;
 import util.ScannerUtil;
 import viewer.MovieViewer;
@@ -18,9 +16,24 @@ public class MovieController {
     private MovieViewer movieViewer;
 
 
-    public MovieController(){
+    public MovieController() {
         list = new ArrayList<>();
-        nextId =1;
+        nextId = 1;
+        MovieDTO movie = new MovieDTO();
+        movie.setId(nextId++);
+        movie.setTitle("파묘");
+        movie.setContent("2미터 다이묘");
+        movie.setLevel(15);
+        list.add(movie);
+
+
+        MovieDTO movie2 = new MovieDTO();
+        movie2.setId(nextId++);
+        movie2.setTitle("돌");
+        movie2.setContent("2미터 다이묘");
+        movie2.setLevel(13);
+        list.add(movie2);
+
     }
 
     public void addMovie(MovieDTO movieDTO) {
@@ -42,7 +55,7 @@ public class MovieController {
         return null;
     }
 
-       // 영화 수정
+    // 영화 수정
     public void update(MovieDTO updatedMovie) {
         for (int i = 0; i < list.size(); i++) {
             MovieDTO movie = list.get(i);
@@ -60,7 +73,6 @@ public class MovieController {
         temp.setId(id);
         list.remove(temp);
     }
-
 
 
     public boolean validateInput(int input) {

@@ -13,6 +13,13 @@ public class TheaterController {
     public TheaterController(){
         list = new ArrayList<>();
         nextId =1;
+        TheaterDTO theater = new TheaterDTO();
+        theater.setId(nextId);
+        theater.setName("롯데시네마");
+        theater.setLocate("안양");
+        theater.setNum("010-1234-5678");
+        list.add(theater);
+
     }
     public void addTheater(TheaterDTO theaterDTO) {
         theaterDTO.setId(nextId++);

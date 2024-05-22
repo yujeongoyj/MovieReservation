@@ -41,18 +41,17 @@ public class TheaterViewer {
         System.out.println("극장 리스트");
         theaterList();
 
-
+        String message = "상세보기할 극장 번호를 선택하세요 / 0으로 뒤로가기 ";
+        int choice = ScannerUtil.nextInt(scanner, message);
+        printOne(choice);
     }
 
-    private void theaterList() {
+    public void theaterList() {
         ArrayList<TheaterDTO> list = (ArrayList<TheaterDTO>) theaterController.selectAll();
         for (TheaterDTO t : list) {
             System.out.printf("%d. %s (%s)\n", t.getId(), t.getName(), t.getLocate());
         }
 
-        String message = "상세보기할 극장 번호를 선택하세요 / 0으로 뒤로가기 ";
-        int choice = ScannerUtil.nextInt(scanner, message);
-        printOne(choice);
 
     }
 
@@ -77,7 +76,7 @@ public class TheaterViewer {
             } else if (choice == 2) {
                 delete(id);
             } else if (choice == 3) {
-                 modifyTheater();
+                modifyTheater();
             }
         }
     }
