@@ -4,6 +4,7 @@ package viewer;
 import controller.MovieController;
 import controller.UserController;
 import lombok.Setter;
+import lombok.With;
 import model.UserDTO;
 import util.ScannerUtil;
 
@@ -23,6 +24,8 @@ public class BoardViewer {
     private MovieViewer movieViewer;
     @Setter
     public UserViewer userViewer;
+    @Setter
+    private TheaterViewer theaterViewer;
 
 
     public void adminMenu1() {
@@ -38,12 +41,12 @@ public class BoardViewer {
     public void adminMenu2() {
         String message = "1. 극장 등록 2. 극장 수정 3. 뒤로가기";
         int menuChoice = ScannerUtil.nextInt(scanner, message);
+
         if (menuChoice == 1) {
-
+            theaterViewer.addTheater();
         } else if (menuChoice == 2) {
-
+            theaterViewer.modifyTheater();
         }
-
     }
 
 

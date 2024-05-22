@@ -51,7 +51,7 @@ public class UserViewer {
 
     public void showAdminMenu() { // 관리자로 로그인 했을 때
         System.out.println("--------관리자화면-----------");
-        String message = "1. 영화 메뉴 2. 극장 메뉴 3. 뒤로가기";
+        String message = "1. 영화 메뉴 2. 극장 메뉴 3. 상영정보 메뉴 4. 뒤로가기";
         while (true) {
             int choice = ScannerUtil.nextInt(scanner, message);
             if (choice == 1) {
@@ -59,6 +59,9 @@ public class UserViewer {
             } else if (choice == 2) {
                 boardViewer.adminMenu2();
             } else if (choice == 3) {
+
+            }
+            else if (choice == 4) {
                 showIndex();
             }
         }

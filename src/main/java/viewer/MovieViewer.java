@@ -93,6 +93,10 @@ public class MovieViewer {
         String newContent = ScannerUtil.nextLine(scanner, message);
         movieDTO.setContent(newContent);
 
+        message = "수정된 등급을 입력해주세요";
+        int newLevel = ScannerUtil.nextInt(scanner, message);
+        movieDTO.setLevel(newLevel);
+
         movieController.update(movieDTO);
     }
 

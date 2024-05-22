@@ -32,6 +32,7 @@ public class MovieController {
         return list;
     }
 
+
     public MovieDTO selectOne(int id) {
         for (MovieDTO movie : list) {
             if (movie.getId() == id) {
