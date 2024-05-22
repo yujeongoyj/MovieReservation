@@ -42,17 +42,19 @@ public class MovieViewer {
         System.out.println("영화 리스트----------------------");
         movieList();
 
+        String message = "상세보기할 영화 번호를 선택하세요 / 0으로 뒤로가기 ";
+        int choice = ScannerUtil.nextInt(scanner, message);
+        printOne(choice);
+
     }
 
-    private void movieList() {
+    public void movieList() {
         ArrayList<MovieDTO> list = (ArrayList<MovieDTO>) movieController.selectAll();
         for (MovieDTO m : list) {
             System.out.printf("%d. %s (%d세)\n", m.getId(), m.getTitle(), m.getLevel());
         }
 
-        String message = "상세보기할 영화 번호를 선택하세요 / 0으로 뒤로가기 ";
-        int choice = ScannerUtil.nextInt(scanner, message);
-        printOne(choice);
+
     }
 
 
@@ -92,6 +94,10 @@ public class MovieViewer {
         message = "수정된 줄거리를 입력해주세요";
         String newContent = ScannerUtil.nextLine(scanner, message);
         movieDTO.setContent(newContent);
+
+        message = "수정된 등급을 입력해주세요";
+        int newLevel = ScannerUtil.nextInt(scanner, message);
+        movieDTO.setLevel(newLevel);
 
         movieController.update(movieDTO);
     }
