@@ -71,7 +71,7 @@ public class ScreenViewer {
         screenList();
     }
 
-    private void screenList() {
+    public void screenList() {
         ArrayList<ScreenDTO> list = (ArrayList<ScreenDTO>) screenController.selectAll();
         for (ScreenDTO s : list) {
             MovieDTO movie = movieController.selectOne(s.getMovieId());

@@ -29,14 +29,16 @@ public class UserViewer {
                 auth();
                 if (logIn != null) {
                     if (logIn.isAdmin()) {
-                        showAdminMenu();
-                    } else if (logIn.getLevel() == 2) {
-                        showCriticMenu();
-                    } else if (logIn.getLevel() == 3) {
-                        showAdminMenu();
+                        showAdminMenu(); // 관리자 화면
+                    }
+//                    else if (logIn.getLevel() == 2) {
+//                        showMenu(); // 평론자 화면
+//                    }
+                    else if (logIn.getLevel() == 3) {
+                        showAdminMenu(); // 관리자 화면
                     } else {
                         boardViewer.setLogIn(logIn);
-                        showMenu();
+                        showMenu(); // 일반회원 / 평론자 화면
                     }
 
                 }
@@ -115,12 +117,12 @@ public class UserViewer {
         }
     }
 
-    private void showMenu() {
-        String message = "1. 영화예매하러 가기 2. 회원 정보 수정 3. 로그아웃";
+    public void showMenu() {
+        String message = "1. 영화/극장/상영 정보 2. 회원 정보 수정 3. 로그아웃";
         while (logIn != null) {
             int userChoice = ScannerUtil.nextInt(scanner, message);
             if (userChoice == 1) {
-                //         boardViewer.showMenu();
+                boardViewer.showMenu();
             } else if (userChoice == 2) {
                 printInfo();
             } else if (userChoice == 3) {

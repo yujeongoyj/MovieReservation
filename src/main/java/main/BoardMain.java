@@ -64,6 +64,8 @@ public class BoardMain {
         screenViewer.setScreenController(screenController);
         screenViewer.setTheaterViewer(theaterViewer);
 
+        boardViewer.setUserViewer(userViewer);
+
         userViewer.showIndex();
     }
 }
