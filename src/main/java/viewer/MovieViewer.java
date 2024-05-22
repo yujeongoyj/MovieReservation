@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MovieViewer {
-    private ArrayList<MovieDTO> list;
+    //private ArrayList<MovieDTO> list;
 
     @Setter
     MovieDTO movieDTO;
