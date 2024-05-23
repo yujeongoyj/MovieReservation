@@ -11,7 +11,6 @@ public class UserDTO {
     private int level; // 등급
     private boolean isAdmin; // 관리자계정인지
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -25,4 +24,7 @@ public class UserDTO {
 
         return false;
     }
+
+
+
 }

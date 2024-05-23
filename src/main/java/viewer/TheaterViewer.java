@@ -110,5 +110,20 @@ public class TheaterViewer {
         }
     }
 
+    public void userPrintOne(int id) {
+        TheaterDTO theaterDTO = theaterController.selectOne(id);
+        System.out.println("찾은 극장: " + theaterDTO); // 로그 추가
+        if (theaterDTO == null) {
+            System.out.println("해당 ID의 극장을 찾을 수 없습니다.");
+            return;
+        }
+        System.out.println("==============================");
+        System.out.println("ID" + theaterDTO.getId());
+        System.out.println("이름 : " + theaterDTO.getName());
+        System.out.println("위치: " + theaterDTO.getLocate());
+        System.out.println("전화번호 : " + theaterDTO.getNum());
+        System.out.println("--------------------------------");
+
+    }
 }
 

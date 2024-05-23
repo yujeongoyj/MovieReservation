@@ -1,13 +1,11 @@
 package main;
 
 
-import controller.ScreenController;
-import controller.TheaterController;
-import controller.UserController;
-import controller.MovieController;
+import controller.*;
 import model.MovieDTO;
 import model.ScreenDTO;
 import model.TheaterDTO;
+import model.UserDTO;
 import viewer.*;
 
 
@@ -23,6 +21,7 @@ public class BoardMain {
         MovieController movieController = new MovieController();
         TheaterController theaterController = new TheaterController();
         ScreenController screenController = new ScreenController();
+        RatingController ratingController = new RatingController();
 
         // 각종 뷰어 클래스 객체
         UserViewer userViewer = new UserViewer();
@@ -35,6 +34,7 @@ public class BoardMain {
         MovieDTO movieDTO = new MovieDTO();
         TheaterDTO theaterDTO = new TheaterDTO();
         ScreenDTO screenDTO = new ScreenDTO();
+        UserDTO userDTO = new UserDTO();
 
         // setter를 사용한 의존성 주입
         userViewer.setScanner(scanner);
@@ -63,9 +63,17 @@ public class BoardMain {
         screenViewer.setMovieViewer(movieViewer);
         screenViewer.setScreenController(screenController);
         screenViewer.setTheaterViewer(theaterViewer);
+        screenViewer.setBoardViewer(boardViewer);
+        screenViewer.setUserController(userController);
 
-        boardViewer.setUserViewer(userViewer);
+        RatingViewer ratingViewer = new RatingViewer();
+        boardViewer.setRatingViewer(ratingViewer);
+        ratingViewer.setRatingController(ratingController);
+
+
+
 
         userViewer.showIndex();
+        //screenViewer.userPrintOne(screenDTO.getId());
     }
 }

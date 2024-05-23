@@ -1,6 +1,7 @@
 package controller;
 
 import model.ScreenDTO;
+import model.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,15 @@ public class ScreenController {
     public ScreenController() {
         list = new ArrayList<>();
         nextId = 1;
+
+
+        ScreenDTO screen = new ScreenDTO();
+        screen.setId(nextId++);
+        screen.setMovieId(1);
+        screen.setTheaterId(1);
+        screen.setScreenTime("14:00");
+        list.add(screen);
+
     }
 
     public void addScreen(ScreenDTO screenDTO) {
@@ -47,4 +57,6 @@ public class ScreenController {
         temp.setId(id);
         list.remove(temp);
     }
+
+
 }

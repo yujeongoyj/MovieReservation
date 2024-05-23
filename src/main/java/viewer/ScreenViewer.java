@@ -3,10 +3,13 @@ package viewer;
 import controller.MovieController;
 import controller.ScreenController;
 import controller.TheaterController;
+import controller.UserController;
+import lombok.Getter;
 import lombok.Setter;
 import model.MovieDTO;
 import model.ScreenDTO;
 import model.TheaterDTO;
+import model.UserDTO;
 import util.ScannerUtil;
 
 import java.util.ArrayList;
@@ -27,6 +30,15 @@ public class ScreenViewer {
     private MovieViewer movieViewer;
     @Setter
     private TheaterViewer theaterViewer;
+    @Getter @Setter
+    private UserDTO logIn;
+    @Setter
+    private BoardViewer boardViewer;
+    @Setter
+    private UserController userController;
+    @Setter
+    private ScreenViewer screenViewer;
+
 
 
     public ScreenViewer() {
@@ -76,8 +88,8 @@ public class ScreenViewer {
         for (ScreenDTO s : list) {
             MovieDTO movie = movieController.selectOne(s.getMovieId());
             TheaterDTO theater = theaterController.selectOne(s.getTheaterId());
-
-            System.out.printf("ID: %d. 영화: %s, 극장: %s, 상영 시간: %s\n", s.getId(), movie.getTitle(), theater.getName(), s.getScreenTime());
+// 영화나 극장 삭제해도 상영정보출력에는 삭제된 정보만 null로 뜨고 나머지는 정상출력되도록
+            System.out.printf("ID: %d. 영화: %s, 극장: %s, 극장 위치: %s, 상영 시간: %s\n", s.getId(), movie.getTitle(), theater.getName(),theater.getLocate(), s.getScreenTime());
 
         }
 
@@ -88,7 +100,10 @@ public class ScreenViewer {
         }
     }
 
-    private void printOne(int id) {
+
+
+    public void printOne(int id) {
+        //logIn = new UserDTO();
         ScreenDTO screenDTO = screenController.selectOne(id);
         if (screenDTO == null) {
             System.out.println("해당 ID의 상영 정보를 찾을 수 없습니다.");
@@ -98,21 +113,35 @@ public class ScreenViewer {
         MovieDTO movie = movieController.selectOne(screenDTO.getMovieId());
         TheaterDTO theater = theaterController.selectOne(screenDTO.getTheaterId());
 
+
         System.out.println("==============================");
         System.out.println("ID: " + screenDTO.getId());
         System.out.println("영화: " + (movie != null ? movie.getTitle() : "알 수 없음"));
         System.out.println("극장: " + (theater != null ? theater.getName() : "알 수 없음"));
+        System.out.println("극장 위치: " + (theater != null ? theater.getLocate() : "알 수 없음"));
         System.out.println("상영 시간: " + screenDTO.getScreenTime());
         System.out.println("--------------------------------");
 
-        String message = "1. 수정 2. 삭제 3. 뒤로가기";
-        int choice = ScannerUtil.nextInt(scanner, message);
-        if (choice == 1) {
-            update(screenDTO);
-        } else if (choice == 2) {
-            delete(id);
-        } else if (choice == 3) {
-            modifyScreen();
+        try
+        {
+            if(logIn.isAdmin()) {
+
+                String message = "1. 수정 2. 삭제 3. 뒤로가기";
+                int choice = ScannerUtil.nextInt(scanner, message);
+                if (choice == 1) {
+                    update(screenDTO);
+                } else if (choice == 2) {
+                    delete(id);
+                } else if (choice == 3) {
+                    modifyScreen();
+                }
+            }
+        }catch (Exception e) {
+            String message = "1. 뒤로가기";
+            int choice = ScannerUtil.nextInt(scanner, message);
+            if (choice == 1) {
+                screenViewer.screenList();
+            }
         }
     }
 
@@ -134,4 +163,26 @@ public class ScreenViewer {
             printOne(id);
         }
     }
+
+
+
+
+
+
+//    public void userPrintOne (int id) { // 일반/평론자 회원이 보는 상영정보 상세보기
+//        ScreenDTO screenDTO = screenController.selectOne(id);
+//        if (screenDTO == null) {
+//            System.out.println("해당 ID의 상영 정보를 찾을 수 없습니다.");
+//            return;
+//        }
+//        MovieDTO movie = movieController.selectOne(screenDTO.getMovieId());
+//        TheaterDTO theater = theaterController.selectOne(screenDTO.getTheaterId());
+//
+//        System.out.println("==============================");
+//        System.out.println("ID: " + screenDTO.getId());
+//        System.out.println("영화: " + (movie != null ? movie.getTitle() : "알 수 없음"));
+//        System.out.println("극장: " + (theater != null ? theater.getName() : "알 수 없음"));
+//        System.out.println("상영 시간: " + screenDTO.getScreenTime());
+//        System.out.println("--------------------------------");
+//    }
 }

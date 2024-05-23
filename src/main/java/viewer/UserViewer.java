@@ -1,6 +1,7 @@
 package viewer;
 
 import controller.MovieController;
+import controller.ScreenController;
 import controller.UserController;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,8 @@ public class UserViewer {
     private BoardViewer boardViewer;
     @Setter
     private MovieController movieController;
+    @Setter
+    private ScreenController screenController;
 
     public void showIndex() {
         String message = "1. 로그인 2. 회원가입 3. 프로그램 종료";
@@ -37,7 +40,6 @@ public class UserViewer {
                     else if (logIn.getLevel() == 3) {
                         showAdminMenu(); // 관리자 화면
                     } else {
-                        boardViewer.setLogIn(logIn);
                         showMenu(); // 일반회원 / 평론자 화면
                     }
 
@@ -81,11 +83,14 @@ public class UserViewer {
         message = "비밀번호를 입력해주세요.";
         String password = ScannerUtil.nextLine(scanner, message);
 
-        logIn = userController.auth(username, password);
+        logIn   = userController.auth(username, password);
+
 
 
         if (logIn == null) {
             System.out.println("잘못 입력하셨습니다. 로그인 정보를 다시 확인해주세요.");
+        }else {
+            boardViewer.setLogIn(logIn);
         }
     }
 
