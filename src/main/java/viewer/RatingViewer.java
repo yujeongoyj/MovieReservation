@@ -26,18 +26,18 @@ public class RatingViewer {
 
 
     public void writeReview(int movieId) {
-        if (ratingController.validateUserId(logIn.getId(), movieId)) {
-            RatingDTO ratingDTO = new RatingDTO();
-            String message = "평론을 작성하세요";
-            String review = ScannerUtil.nextLine(scanner, message);
 
-            ratingDTO.setUserId(logIn.getId());
-            ratingDTO.setMovieId(movieId);
-            ratingDTO.setReview(review);
+        RatingDTO ratingDTO = new RatingDTO();
+        String message = "평론을 작성하세요";
+        String review = ScannerUtil.nextLine(scanner, message);
 
-            ratingController.addRating(ratingDTO);
-            System.out.println("평론이 등록되었습니다.");
-        }
+        ratingDTO.setUserId(logIn.getId());
+        ratingDTO.setMovieId(movieId);
+        ratingDTO.setReview(review);
+
+        ratingController.addRating(ratingDTO);
+        System.out.println("평론이 등록되었습니다.");
+
     }
 
     public void printReviews(int movieId) {
@@ -49,26 +49,23 @@ public class RatingViewer {
             System.out.printf("평론: %s\n", rating.getReview());
             System.out.println("-------------------------------------");
         }
-
-
     }
 
 
+    public void rateMovie( int movieId) {
+        // if (ratingController.validateUserId(logIn.getId(), movieId)) {
+        RatingDTO ratingDTO = new RatingDTO();
+        String message = "평점을 입력하세요 (1~5):";
+        int ratingValue = ScannerUtil.nextInt(scanner, message, 1, 5);
 
-    public void rateMovie(int movieId) {
-        if (ratingController.validateUserId(logIn.getId(), movieId)) {
-            RatingDTO ratingDTO = new RatingDTO();
-            String message = "평점을 입력하세요 (1~5):";
-            int ratingValue = ScannerUtil.nextInt(scanner, message, 1, 5);
-
-            ratingDTO.setUserId(logIn.getId());
-            ratingDTO.setMovieId(movieId);
-            ratingDTO.setRating(ratingValue);
+        ratingDTO.setUserId(logIn.getId());
+        ratingDTO.setMovieId(movieId);
+        ratingDTO.setRating(ratingValue);
 
 
-            ratingController.addRating(ratingDTO);
-            System.out.println("평점이 등록되었습니다.");
-        }
+        ratingController.addRating(ratingDTO);
+        System.out.println("평점이 등록되었습니다.");
+        //   }
 
 
     }
@@ -85,13 +82,13 @@ public class RatingViewer {
         System.out.printf("전체 평균 평점: %.2f\n", averageRating);
     }
 
-    public void userPrintRatings(int movieId) {
-        ArrayList<RatingDTO> ratings = ratingController.selectAllByMovieId(movieId);
-    }
+    public void criticAverageRating(int movieId) {
+        double criticAverage = ratingController.criticAverage(movieId);
+        System.out.println("평론가 평점 평균: " + criticAverage); }
 
-    public void reviewerRatings(int movieId) {
-        ArrayList<RatingDTO> ratings = ratingController.selectAllByMovieId(movieId);
+    public void userAverageRating(int movieId) {
+        double userAverage = ratingController.userAverage(movieId);
+        System.out.println("일반회원 평점 평균: " + userAverage);
     }
-
 
 }

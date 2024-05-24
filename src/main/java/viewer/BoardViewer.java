@@ -36,7 +36,7 @@ public class BoardViewer {
 
 
     public void adminMenu1() {
-        String message = "1. 영화 등록 2. 영화 수정 3.  뒤로가기";
+        String message = "1. 영화 등록 2. 영화 수정/삭제 (목록보기) 3.  뒤로가기";
         int menuChoice = ScannerUtil.nextInt(scanner, message);
         if (menuChoice == 1) {
             movieViewer.addMovie();
@@ -46,7 +46,7 @@ public class BoardViewer {
     }
 
     public void adminMenu2() {
-        String message = "1. 극장 등록 2. 극장 수정 3. 뒤로가기";
+        String message = "1. 극장 등록 2. 극장 수정/삭제 (목록보기) 3. 뒤로가기";
         int menuChoice = ScannerUtil.nextInt(scanner, message);
 
         if (menuChoice == 1) {
@@ -57,7 +57,7 @@ public class BoardViewer {
     }
 
     public void adminMenu3() {
-        String message = "1. 상영정보 등록 2. 상영정보 수정 3. 뒤로가기";
+        String message = "1. 상영정보 등록 2. 상영정보 수정 (목록) 3. 뒤로가기";
         screenViewer.setLogIn(logIn);
         int menuChoice = ScannerUtil.nextInt(scanner, message);
         if (menuChoice == 1) {
@@ -78,7 +78,10 @@ public class BoardViewer {
             int choice = ScannerUtil.nextInt(scanner, message);
             movieViewer.userPrintOne(choice);
             ratingViewer.printRatings(choice);
+            ratingViewer.criticAverageRating(choice);
+            ratingViewer.userAverageRating(choice);
             ratingViewer.printReviews(choice);
+
             showMovieDetail(choice);
 
 
@@ -100,7 +103,7 @@ public class BoardViewer {
         ratingViewer.setLogIn(logIn);
         int choice2 = ScannerUtil.nextInt(scanner, message);
         if (choice2 == 1) {
-            ratingViewer.rateMovie(movieId);
+            ratingViewer.rateMovie( movieId);
         } else if (choice2 == 2) {
             if (logIn.getLevel() == 2) {
                 ratingViewer.writeReview(movieId);

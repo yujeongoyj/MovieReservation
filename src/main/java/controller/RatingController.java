@@ -18,19 +18,19 @@ public class RatingController {
         nextId = 1;
     }
 
-    // 사용자 데이터 추가하는 메서드
+
     public void addUser(UserDTO user) {
         userList.add(user);
     }
 
-    // 사용자 레벨을 가져오는 메서드
+    // 사용자 레벨을 가져오는
     public int getUserLevel(int userId) {
         for (UserDTO userDTO : userList) {
             if (userDTO.getId() == userId) {
                 return userDTO.getLevel();
             }
         }
-        return -1; // 사용자를 찾지 못한 경우 -1 반환 또는 예외 처리
+        return -1;
     }
 
     public void addRating(RatingDTO ratingDTO) {
@@ -66,14 +66,74 @@ public class RatingController {
     public boolean validateUserId(int userId, int movieId) {
 
             for (RatingDTO rating : list) {
-                if (rating.getId() == userId && rating.getMovieId() == movieId) {
-                    System.out.println("한번만 가능합니다.");
-                    return false;
+                if(!(getUserLevel(rating.getUserId()) == 2)) {
+                    if (rating.getId() == userId && rating.getMovieId() == movieId) {
+                        System.out.println("한번만 가능합니다.");
+                        return false;
+                    }
                 }
+
             }
 
         return true;
     }
+
+
+
+
+
+    public double criticAverage(int movieId) {
+        ArrayList<RatingDTO> ratings = selectAllByMovieId(movieId);
+        double sum = 0;
+        for (RatingDTO rating : ratings) {
+            int userLevel = getUserLevel(rating.getUserId());
+            if(userLevel == 2) {
+                sum += rating.getRating();
+            }
+        }
+
+        return sum / ratings.size();
+
+        //        int criticCount = 0;
+//        double criticSum = 0;
+//
+//        for (RatingDTO rating : ratings) {
+//            int userId = rating.getUserId();
+//            int userLevel = getUserLevel(userId);
+//            if (userLevel == 2) { // 평론가 레벨
+//                criticSum += rating.getRating();
+//                criticCount++;
+//            }
+//        }
+//        if (criticCount == 0) {
+//            return 0;
+//        }
+//        return criticSum / criticCount;
+    }
+
+    public double userAverage(int movieId) {
+        ArrayList<RatingDTO> ratings = selectAllByMovieId(movieId);
+        int userCount = 0;
+        double userSum = 0;
+
+        for (RatingDTO rating : ratings) {
+            int userId = rating.getUserId();
+            int userLevel = getUserLevel(userId);
+            if (userLevel == 1) { // 일반 회원 레벨
+                userSum += rating.getRating();
+                userCount++;
+            }
+        }
+
+        if (userCount == 0) {
+            return 0;
+        }
+
+        return userSum / userCount;
+    }
+
+
+
 }
 
 
