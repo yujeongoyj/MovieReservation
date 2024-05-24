@@ -28,8 +28,8 @@ public class BoardMain {
         BoardViewer boardViewer = new BoardViewer();
         MovieViewer movieViewer = new MovieViewer();
         TheaterViewer theaterViewer = new TheaterViewer();
-      ScreenViewer screenViewer = new ScreenViewer();
-
+        ScreenViewer screenViewer = new ScreenViewer();
+        RatingViewer ratingViewer = new RatingViewer();
 
         MovieDTO movieDTO = new MovieDTO();
         TheaterDTO theaterDTO = new TheaterDTO();
@@ -37,13 +37,13 @@ public class BoardMain {
         UserDTO userDTO = new UserDTO();
 
         // setter를 사용한 의존성 주입
+        ratingViewer.setScanner(scanner);
         userViewer.setScanner(scanner);
         userViewer.setUserController(userController);
         userViewer.setBoardViewer(boardViewer);
         screenViewer.setScreenController(screenController);
         screenViewer.setMovieController(movieController);
         screenViewer.setTheaterController(theaterController);
-
 
 
         boardViewer.setScanner(scanner);
@@ -66,10 +66,9 @@ public class BoardMain {
         screenViewer.setBoardViewer(boardViewer);
         screenViewer.setUserController(userController);
 
-        RatingViewer ratingViewer = new RatingViewer();
-        boardViewer.setRatingViewer(ratingViewer);
         ratingViewer.setRatingController(ratingController);
-
+        ratingViewer.setRatingController(ratingController);
+        boardViewer.setRatingViewer(ratingViewer);
 
 
 
