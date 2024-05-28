@@ -58,7 +58,7 @@ public class MovieViewer {
     }
 
 
-    private void printOne(int id) {
+    public void printOne(int id) {
         MovieDTO movieDTO = movieController.selectOne(id);
         System.out.println("찾은 영화: " + movieDTO); // 로그 추가
         if (movieDTO == null) {
@@ -113,6 +113,23 @@ public class MovieViewer {
         }else {
             printOne(id);
         }
+    }
+
+    public void userPrintOne(int id) {
+        MovieDTO movieDTO = movieController.selectOne(id);
+        System.out.println("찾은 영화: " + movieDTO); // 로그 추가
+        if (movieDTO == null) {
+            System.out.println("해당 ID의 영화를 찾을 수 없습니다.");
+            return;
+        }
+
+        System.out.println("==============================");
+        System.out.println(movieDTO.getId() + "번");
+        System.out.println("제목 : " + movieDTO.getTitle());
+        System.out.println("줄거리: " + movieDTO.getContent());
+        System.out.println("상영등급 : " + movieDTO.getLevel());
+        System.out.println("--------------------------------");
+
     }
 
 }

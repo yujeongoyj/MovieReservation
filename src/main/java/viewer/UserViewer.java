@@ -1,6 +1,7 @@
 package viewer;
 
 import controller.MovieController;
+import controller.ScreenController;
 import controller.UserController;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,8 @@ public class UserViewer {
     private BoardViewer boardViewer;
     @Setter
     private MovieController movieController;
+    @Setter
+    private ScreenController screenController;
 
     public void showIndex() {
         String message = "1. 로그인 2. 회원가입 3. 프로그램 종료";
@@ -29,14 +32,15 @@ public class UserViewer {
                 auth();
                 if (logIn != null) {
                     if (logIn.isAdmin()) {
-                        showAdminMenu();
-                    } else if (logIn.getLevel() == 2) {
-                        showCriticMenu();
-                    } else if (logIn.getLevel() == 3) {
-                        showAdminMenu();
+                        showAdminMenu(); // 관리자 화면
+                    }
+//                    else if (logIn.getLevel() == 2) {
+//                        showMenu(); // 평론자 화면
+//                    }
+                    else if (logIn.getLevel() == 3) {
+                        showAdminMenu(); // 관리자 화면
                     } else {
-                        boardViewer.setLogIn(logIn);
-                        showMenu();
+                        showMenu(); // 일반회원 / 평론자 화면
                     }
 
                 }
@@ -79,11 +83,14 @@ public class UserViewer {
         message = "비밀번호를 입력해주세요.";
         String password = ScannerUtil.nextLine(scanner, message);
 
-        logIn = userController.auth(username, password);
+        logIn   = userController.auth(username, password);
+
 
 
         if (logIn == null) {
             System.out.println("잘못 입력하셨습니다. 로그인 정보를 다시 확인해주세요.");
+        }else {
+            boardViewer.setLogIn(logIn);
         }
     }
 
@@ -115,12 +122,12 @@ public class UserViewer {
         }
     }
 
-    private void showMenu() {
-        String message = "1. 영화예매하러 가기 2. 회원 정보 수정 3. 로그아웃";
+    public void showMenu() {
+        String message = "1. 영화/극장/상영 정보 2. 회원 정보 수정 3. 로그아웃";
         while (logIn != null) {
             int userChoice = ScannerUtil.nextInt(scanner, message);
             if (userChoice == 1) {
-                //         boardViewer.showMenu();
+                boardViewer.showMenu();
             } else if (userChoice == 2) {
                 printInfo();
             } else if (userChoice == 3) {
